@@ -46,7 +46,7 @@ namespace TodoApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodoItem(int id, TodoItem todoItem)
         {
-            if (id != todoItem.ID)
+            if (id != todoItem.Id)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace TodoApi.Controllers
             await _context.SaveChangesAsync();
 
            // return CreatedAtAction("GetTodoItem", new { id = todoItem.ID }, todoItem);
-           return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.ID }, todoItem);
+           return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
 
         // DELETE: api/TodoItems/5
@@ -102,7 +102,7 @@ namespace TodoApi.Controllers
 
         private bool TodoItemExists(int id)
         {
-            return _context.TodoItems.Any(e => e.ID == id);
+            return _context.TodoItems.Any(e => e.Id == id);
         }
     }
 }
