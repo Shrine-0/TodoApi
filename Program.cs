@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
+using MySql.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
  
 namespace TodoApi.Models
 {
@@ -11,6 +12,9 @@ namespace TodoApi.Models
         public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
         }
-        public DbSet<TodoItem> TodoItems {set;get;} =null!;
+        public DbSet<TodoItem> TodoItems {set;get;} =null!;//creating a table TodoItem
+        public DbSet<TodoItemDTO> TodoItemDTOs {set;get;} =null!; //creating another table TodoItemDTO   
+
+
     }
 }
