@@ -7,37 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using MySql.Data.MySqlClient;
+
+
 namespace TodoApi.Controllers
 {
-   
-    public class DatabaseConnection
-        {
-            private readonly string _connectionString;
-            private MySqlConnection _connection;
 
-            public DatabaseConnection(string connectionString)
-            {
-                _connectionString = connectionString;
-            }
 
-            public void Connect()
-            {
-                _connection = new MySqlConnection(_connectionString);
-                _connection.Open();
-            }
-
-            public void Disconnect()
-            {
-                _connection.Close();
-            }
-
-            public void ExecuteSql(string sql)
-            {
-                var command = new MySqlCommand(sql, _connection);
-                command.ExecuteNonQuery();
-            }
-        }
-[Route("api/Todoitems")]
+    [Route("api/Todoitems")]
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
@@ -133,9 +109,9 @@ namespace TodoApi.Controllers
              return _context.TodoItems.Any(e => e.Id == id);
          }**/
 
-                private readonly DatabaseConnection _databaseConnection;
+        private readonly DatabaseConnection _databaseConnection;
 
-        public  TodoItemsController()
+        public TodoItemsController()
         {
             _databaseConnection = new DatabaseConnection("Server=127.0.0.1;Database=ApexRestaurantDB;Uid=root;Pwd=forlorn123X;");
             _databaseConnection.Connect();
@@ -143,13 +119,20 @@ namespace TodoApi.Controllers
         }
 
         [HttpGet]
-        public string GetData()
+        /**public string GetData()
         {
             // Execute a SQL query
+
+
             _databaseConnection.ExecuteSql("SELECT * FROM Customers");
 
             // Return some data
             return "Data retrieved from the database";
+        }**/
+        public string WriteData()
+        {
+            _databaseConnection.ExecuteSql("Insert into Customers (FirstName,LastName, Address, PhoneRes,PhoneMob, EnrollDate, IsActive, CreatedBy, CreatedOn, UpdatedBy, UpdatedOn) values ('emilia','korin','Earth','0987890087','9876543210','2019-01-01 00:00:00.000',1,'sDumbeldore','2019-01-01 10:00:00.000','snape','2019-01-01 11:00:00.000')");
+            return "Data has been inserted";
         }
     }
 }
